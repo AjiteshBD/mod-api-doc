@@ -1,0 +1,727 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../02_state_format_specific_parser_/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Chapter 1: PDF Type Detector - Backend-mod-api-php</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.2afb09e1.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://unpkg.com/mermaid@10.9.1/dist/mermaid.min.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-1-pdf-type-detector" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Backend-mod-api-php" class="md-header__button md-logo" aria-label="Backend-mod-api-php" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Backend-mod-api-php
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 1: PDF Type Detector
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Backend-mod-api-php" class="md-nav__button md-logo" aria-label="Backend-mod-api-php" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Backend-mod-api-php
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tutorial: Backend-mod-api-php
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Chapter 1: PDF Type Detector
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 1: PDF Type Detector
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem-so-many-different-pdfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Problem: So Many Different PDFs!
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-solution-the-pdf-type-detector-our-gatekeeper" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Solution: The PDF Type Detector - Our Gatekeeper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-is-identifying-the-type-so-important" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why is Identifying the Type So Important?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-does-it-work-a-peek-inside" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Does It Work? A Peek Inside
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-snippets-seeing-the-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Snippets: Seeing the Logic
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_state_format_specific_parser_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 2: State/Format Specific Parser
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_pdfminer_parser_engine_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 3: PDFMiner Parser Engine
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_ocr_parser_engine_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 4: OCR Parser Engine
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_layout_analyzer_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 5: Layout Analyzer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_data_extraction___transformation_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 6: Data Extraction &amp; Transformation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_json_output_formatter_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 7: JSON Output Formatter
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem-so-many-different-pdfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Problem: So Many Different PDFs!
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-solution-the-pdf-type-detector-our-gatekeeper" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Solution: The PDF Type Detector - Our Gatekeeper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-is-identifying-the-type-so-important" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why is Identifying the Type So Important?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-does-it-work-a-peek-inside" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Does It Work? A Peek Inside
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-snippets-seeing-the-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Snippets: Seeing the Logic
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="chapter-1-pdf-type-detector">Chapter 1: PDF Type Detector</h1>
+<p>Welcome to the <code>Backend-mod-api-php</code> tutorial! We're going to explore how this project processes PDF documents, specifically insurance forms like Experience Modification Rate (mod) worksheets. These documents contain valuable data, but extracting it automatically can be tricky because they come in many different formats.</p>
+<h2 id="the-problem-so-many-different-pdfs">The Problem: So Many Different PDFs!</h2>
+<p>Imagine you receive dozens of mod worksheets every day. Some might be from NCCI (National Council on Compensation Insurance), others from specific states like California (CA) or Michigan (MI), and some might just be scanned images of paper forms. Each type looks different and has data arranged in its own unique way.</p>
+<p>How can our system automatically understand which type of document it's looking at so it can extract the information correctly? Trying to use a single method for all of them would be like trying to use the same key for different locks – it just wouldn't work reliably.</p>
+<h2 id="the-solution-the-pdf-type-detector-our-gatekeeper">The Solution: The PDF Type Detector - Our Gatekeeper</h2>
+<p>This is where the <strong>PDF Type Detector</strong> comes in. Think of it as the project's initial gatekeeper or a super-smart sorting office for PDFs. Its main job is to look at a newly arrived PDF and figure out what kind it is.</p>
+<ul>
+<li><strong>Is it an NCCI form?</strong></li>
+<li><strong>Is it a California (CA) form?</strong></li>
+<li><strong>Is it a Michigan (MI) form?</strong></li>
+<li><strong>Is it a New York (NY) form?</strong></li>
+<li><strong>Or... is it just a picture of a form (a scanned image)?</strong></li>
+</ul>
+<p>It does this by quickly analyzing the text and layout of the <em>first page</em> of the PDF. It looks for tell-tale signs – specific words, phrases, or how things are positioned on the page.</p>
+<p>If the Detector recognizes the format (like NCCI or CA), it tells the system, "Okay, this is an NCCI document. Send it to the NCCI processor."</p>
+<p>If the Detector finds that it <em>can't read the text</em> directly (maybe the PDF is just an image, like a photo or a scan), it flags it and says, "This looks like a scanned image. We'll need to use Optical Character Recognition (OCR) to read it first." We'll learn more about OCR later in the <a href="../04_ocr_parser_engine_/">OCR Parser Engine</a> chapter.</p>
+<h2 id="why-is-identifying-the-type-so-important">Why is Identifying the Type So Important?</h2>
+<p>Knowing the PDF type right at the beginning is crucial. Why? Because different forms need different rules to extract data accurately. An NCCI form has data in different places compared to a California form. By identifying the type first, we ensure the PDF gets sent to the correct specialized tool – the <a href="../02_state_format_specific_parser_/">State/Format Specific Parser</a> – which knows exactly where to find the information for <em>that specific type</em> of document.</p>
+<h2 id="how-does-it-work-a-peek-inside">How Does It Work? A Peek Inside</h2>
+<p>The PDF Type Detector relies heavily on a Python script (<code>pdf_type_detector.py</code>) and a powerful library called <code>pdfminer.six</code> (which we'll explore more in the <a href="../03_pdfminer_parser_engine_/">PDFMiner Parser Engine</a> chapter) to peek inside the PDF.</p>
+<p>Here's a simplified step-by-step:</p>
+<ol>
+<li><strong>Open the PDF:</strong> The detector gets the path to the PDF file.</li>
+<li><strong>Try Reading Text:</strong> It uses <code>pdfminer.six</code> to extract text elements and their positions (X, Y coordinates) from the first page.</li>
+<li><strong>Collect Clues:</strong> The extracted text lines are stored, including the words and their locations.</li>
+<li><strong>Hunt for Keywords:</strong> The detector scans the extracted text for specific keywords that act as markers. For example:<ul>
+<li>Does it see "NCCI" near the top? Likely an NCCI form.</li>
+<li>Does it see "California" or "WCIRB"? Likely a CA form.</li>
+<li>Does it see "Michigan"? Likely an MI form.</li>
+<li>Does it see "NYCIRB"? Likely an NY form.</li>
+</ul>
+</li>
+<li><strong>Check Text Readability:</strong> It also checks <em>if</em> text could be extracted properly. If it gets very little text, gibberish (like <code>(cid:...)</code>), or text with fonts often used by OCR software <em>after</em> scanning, it suspects the PDF is an image or needs OCR.</li>
+<li><strong>Make a Decision:</strong><ul>
+<li>If strong keywords are found and the text is readable, it returns the identified type (e.g., "NCCI", "CA", "MI", "NY").</li>
+<li>If the text seems unreadable or looks like a scan, it returns a special code (like '1' or '2') telling the system that OCR processing is required via the <a href="../04_ocr_parser_engine_/">OCR Parser Engine</a>.</li>
+<li>If it's readable text but doesn't match any known type, it might default to a specific type or also trigger OCR as a fallback.</li>
+</ul>
+</li>
+</ol>
+<p>Let's visualize this flow:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant System
+    participant PDT as PDF Type Detector
+    participant PDFMiner as PDFMiner Engine
+    participant OCR as OCR Engine
+
+    System-&gt;&gt;PDT: Process this PDF file: 'my_mod_form.pdf'
+    PDT-&gt;&gt;PDFMiner: Extract text and layout from page 1 of 'my_mod_form.pdf'
+    PDFMiner--&gt;&gt;PDT: Here's the text found: ["NCCI", "Risk ID", ...] and their positions
+    PDT-&gt;&gt;PDT: Analyze text: Found "NCCI". Text is readable.
+    PDT--&gt;&gt;System: Type detected: 'NCCI'
+
+    System-&gt;&gt;PDT: Process this PDF file: 'scanned_form.pdf'
+    PDT-&gt;&gt;PDFMiner: Extract text and layout from page 1 of 'scanned_form.pdf'
+    PDFMiner--&gt;&gt;PDT: Found very little text or OCR fonts.
+    PDT-&gt;&gt;PDT: Analyze text: Not readable / looks scanned.
+    PDT--&gt;&gt;System: Type detected: '1' (Needs OCR)
+    System-&gt;&gt;OCR: Process 'scanned_form.pdf' using OCR</code></pre>
+<h2 id="code-snippets-seeing-the-logic">Code Snippets: Seeing the Logic</h2>
+<p>The core logic resides in the <code>pdf_type_detector.py</code> script. Let's look at a <em>simplified</em> idea of how it identifies the type based on keywords found in the extracted text (<code>ListOfStrings</code> contains items like <code>[[X, Y, Width, Height], 'text', 'font', size]</code>).</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># (Inside pdf_type_detector.py - simplified logic)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_pdf</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">start_page</span><span class="p">,</span> <span class="n">end_page</span><span class="p">):</span>
+    <span class="c1"># ... (code to open PDF and extract text into ListOfStrings) ...</span>
+    <span class="c1"># ListOfStrings contains text elements like:</span>
+    <span class="c1"># [[100, 700, 150, 710], &#39;ncci experience rating worksheet&#39;, &#39;fontA&#39;, 10]</span>
+    <span class="c1"># [[450, 700, 500, 710], &#39;risk id:&#39;, &#39;fontB&#39;, 9]</span>
+
+    <span class="n">type_pdf</span> <span class="o">=</span> <span class="s1">&#39;undefined&#39;</span> <span class="c1"># Default type</span>
+    <span class="n">ocr_detected</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># Assume it&#39;s not a scan initially</span>
+
+    <span class="c1"># --- Text Extraction using PDFMiner happens here ---</span>
+    <span class="c1"># If extraction fails or text looks weird, set ocr_detected = True</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ocr_detected</span> <span class="ow">and</span> <span class="n">ListOfStrings</span><span class="p">:</span> <span class="c1"># If we got readable text</span>
+        <span class="c1"># Check for keywords in the extracted text</span>
+        <span class="n">all_text_page_1</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">ListOfStrings</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="s1">&#39;ncci&#39;</span> <span class="ow">in</span> <span class="n">all_text_page_1</span> <span class="ow">and</span> <span class="s1">&#39;risk id&#39;</span> <span class="ow">in</span> <span class="n">all_text_page_1</span><span class="p">:</span>
+            <span class="n">type_pdf</span> <span class="o">=</span> <span class="s1">&#39;NCCI&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;california&#39;</span> <span class="ow">in</span> <span class="n">all_text_page_1</span> <span class="ow">or</span> <span class="s1">&#39;wcirb&#39;</span> <span class="ow">in</span> <span class="n">all_text_page_1</span><span class="p">:</span>
+            <span class="n">type_pdf</span> <span class="o">=</span> <span class="s1">&#39;CA&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;michigan&#39;</span> <span class="ow">in</span> <span class="n">all_text_page_1</span><span class="p">:</span>
+            <span class="n">type_pdf</span> <span class="o">=</span> <span class="s1">&#39;MI&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;nycirb&#39;</span> <span class="ow">in</span> <span class="n">all_text_page_1</span><span class="p">:</span>
+            <span class="n">type_pdf</span> <span class="o">=</span> <span class="s1">&#39;NY&#39;</span>
+        <span class="c1"># ... other checks for WI, PA, NC etc. ...</span>
+
+    <span class="c1"># --- Decision time ---</span>
+    <span class="k">if</span> <span class="n">ocr_detected</span><span class="p">:</span>
+        <span class="c1"># Return &#39;1&#39; or &#39;2&#39; to signal need for different OCR methods</span>
+        <span class="k">return</span> <span class="s1">&#39;1&#39;</span> <span class="c1"># Example: Needs basic OCR</span>
+    <span class="k">elif</span> <span class="n">type_pdf</span> <span class="o">!=</span> <span class="s1">&#39;undefined&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">type_pdf</span> <span class="c1"># Return the identified type (e.g., &#39;NCCI&#39;)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Readable text, but didn&#39;t match known types. Maybe try OCR?</span>
+        <span class="k">return</span> <span class="s1">&#39;1&#39;</span> <span class="c1"># Fallback: Treat as potentially scanned</span>
+</code></pre></div>
+<p>This simplified snippet shows the core idea:
+1.  Try to extract text using the <a href="../03_pdfminer_parser_engine_/">PDFMiner Parser Engine</a>.
+2.  Check if the extraction worked (<code>ocr_detected</code>).
+3.  If text is good, search for keywords (<code>'ncci'</code>, <code>'california'</code>, etc.).
+4.  Return the identified type or a code indicating OCR is needed.</p>
+<p>The actual code (<code>pdf_type_detector.py</code>) has more sophisticated checks, including looking at text positions and specific font names sometimes embedded by scanners, but the fundamental principle is this keyword and readability analysis. It also distinguishes between two types of OCR needed ('1' for photo-like scans, '2' for PDFs with weird symbols where text should be).</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>The PDF Type Detector acts as the essential first step in the document processing pipeline. It quickly analyzes an incoming PDF, determines its format (NCCI, CA, MI, NY, etc.) or identifies if it's a scanned image requiring OCR. This classification allows the system to route the PDF to the correct specialized tool for accurate data extraction.</p>
+<p>Now that we know how the system identifies the <em>type</em> of PDF, what happens next? The PDF is handed off to a parser specifically designed for that type. Let's explore that in the next chapter!</p>
+<p><strong>Next:</strong> <a href="../02_state_format_specific_parser_/">Chapter 2: State/Format Specific Parser</a></p>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10.9.1/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

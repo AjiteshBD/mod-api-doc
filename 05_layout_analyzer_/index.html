@@ -1,0 +1,851 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../04_ocr_parser_engine_/">
+      
+      
+        <link rel="next" href="../06_data_extraction___transformation_/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Chapter 5: Layout Analyzer - Backend-mod-api-php</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.2afb09e1.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://unpkg.com/mermaid@10.9.1/dist/mermaid.min.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-5-layout-analyzer" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Backend-mod-api-php" class="md-header__button md-logo" aria-label="Backend-mod-api-php" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Backend-mod-api-php
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 5: Layout Analyzer
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Backend-mod-api-php" class="md-nav__button md-logo" aria-label="Backend-mod-api-php" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Backend-mod-api-php
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tutorial: Backend-mod-api-php
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_pdf_type_detector_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 1: PDF Type Detector
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_state_format_specific_parser_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 2: State/Format Specific Parser
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_pdfminer_parser_engine_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 3: PDFMiner Parser Engine
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_ocr_parser_engine_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 4: OCR Parser Engine
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Chapter 5: Layout Analyzer
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 5: Layout Analyzer
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem-making-sense-of-raw-text-locations" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Problem: Making Sense of Raw Text Locations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-solution-the-layout-analyzer-our-structure-detective" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Solution: The Layout Analyzer - Our Structure Detective
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-layout-analysis-techniques" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Layout Analysis Techniques
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works-connecting-text-to-meaning" class="md-nav__link">
+    <span class="md-ellipsis">
+      How It Works: Connecting Text to Meaning
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-examples-seeing-the-detective-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Examples: Seeing the Detective Work
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_data_extraction___transformation_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 6: Data Extraction &amp; Transformation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_json_output_formatter_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 7: JSON Output Formatter
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem-making-sense-of-raw-text-locations" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Problem: Making Sense of Raw Text Locations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-solution-the-layout-analyzer-our-structure-detective" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Solution: The Layout Analyzer - Our Structure Detective
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-layout-analysis-techniques" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Layout Analysis Techniques
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works-connecting-text-to-meaning" class="md-nav__link">
+    <span class="md-ellipsis">
+      How It Works: Connecting Text to Meaning
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-examples-seeing-the-detective-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Examples: Seeing the Detective Work
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="chapter-5-layout-analyzer">Chapter 5: Layout Analyzer</h1>
+<p>Welcome back! In the previous chapters, we explored how the system identifies the type of PDF (<a href="../01_pdf_type_detector_/">PDF Type Detector</a>), chooses the right specialist parser (<a href="../02_state_format_specific_parser_/">State/Format Specific Parser</a>), and uses engines to read the raw text, either directly (<a href="../03_pdfminer_parser_engine_/">PDFMiner Parser Engine</a>) or from images (<a href="../04_ocr_parser_engine_/">OCR Parser Engine</a>).</p>
+<p>So now, our specialized parser has a list of text pieces and their locations (X, Y coordinates) on the page. But how does it know <em>what</em> each piece of text means? How does it figure out that the number <code>12345</code> is the "Risk ID" and not just some random number?</p>
+<h2 id="the-problem-making-sense-of-raw-text-locations">The Problem: Making Sense of Raw Text Locations</h2>
+<p>Imagine you have a filled-out paper form, but instead of seeing the form itself, you only get a list like this:</p>
+<ul>
+<li>"Risk ID:" found at (top-right corner)</li>
+<li>"12345" found slightly to the right of "Risk ID:"</li>
+<li>"Effective Date:" found at (middle-left)</li>
+<li>"01/01/2024" found slightly to the right of "Effective Date:"</li>
+<li>"Totals" found near the bottom</li>
+<li>"500" found under the "Payroll" column header, near the "Totals" line.</li>
+</ul>
+<p>Just having the text and its location isn't enough. The computer needs rules to understand the <em>structure</em> of the form – where the headers are, where the data fields are relative to those headers, and how tables are organized.</p>
+<h2 id="the-solution-the-layout-analyzer-our-structure-detective">The Solution: The Layout Analyzer - Our Structure Detective</h2>
+<p>This is where the <strong>Layout Analyzer</strong> logic comes in. It's not a separate engine but rather the <em>intelligence embedded within</em> each <a href="../02_state_format_specific_parser_/">State/Format Specific Parser</a>.</p>
+<p>Think of the Layout Analyzer as the parser's ability to <strong>read the form's structure</strong>, just like you would:</p>
+<ul>
+<li><strong>Reading Headings:</strong> It looks for specific keywords (like "Risk ID:", "Carrier", "Policy Period", "Totals") that act as labels or section titles.</li>
+<li><strong>Using Coordinates:</strong> For forms with very consistent layouts, it looks for text within precise X, Y coordinate ranges where specific data is always expected to be.</li>
+<li><strong>Understanding Tables:</strong> It identifies rows and columns, often by looking for header words or using the positions of text elements relative to each other. It uses visual cues like whitespace or sometimes even lines (though less common in this project).</li>
+<li><strong>Segmenting the Page:</strong> It breaks the page down into meaningful sections (like header, policy details table, totals section) to process them independently.</li>
+</ul>
+<p>Functions like <code>split</code>, <code>returnc</code>, <code>segmentation</code>, <code>same</code>, and coordinate range checks (<code>blockIsIn</code>, <code>isIn</code>) found within the parser scripts are the tools that implement this layout analysis logic.</p>
+<h2 id="key-layout-analysis-techniques">Key Layout Analysis Techniques</h2>
+<p>Let's break down the common methods used by the Layout Analyzer logic:</p>
+<ol>
+<li>
+<p><strong>Keyword-Based Search:</strong></p>
+<ul>
+<li><strong>Goal:</strong> Find a known label or header word.</li>
+<li><strong>How:</strong> Scan the text extracted by <a href="../03_pdfminer_parser_engine_/">PDFMiner Parser Engine</a> or <a href="../04_ocr_parser_engine_/">OCR Parser Engine</a> for specific strings (e.g., "Bureau No.", "Carrier:", "Totals").</li>
+<li><strong>Why:</strong> Once a keyword is found, the parser often looks for the actual data <em>nearby</em> (e.g., immediately to the right, below, or within a certain area relative to the keyword).</li>
+</ul>
+</li>
+<li>
+<p><strong>Coordinate-Based Search:</strong></p>
+<ul>
+<li><strong>Goal:</strong> Find data known to be in a fixed position on a specific form type.</li>
+<li><strong>How:</strong> Check if a text element's X, Y coordinates fall within a predefined rectangular area (bounding box).</li>
+<li><strong>Why:</strong> Very efficient for forms where the layout almost never changes. Often used by PDFMiner-based parsers.</li>
+</ul>
+</li>
+<li>
+<p><strong>Structural Analysis (Sections, Rows, Columns):</strong></p>
+<ul>
+<li><strong>Goal:</strong> Understand the overall organization, especially for tables.</li>
+<li><strong>How:</strong><ul>
+<li><strong>Splitting/Segmentation:</strong> Divide the page horizontally or vertically based on keywords (like "Totals" often marking the end of a table section - see <code>split</code> in <code>ocrNC.py</code>) or visual gaps. The <code>segmentation</code> function in <code>pdf2Json_amit_edit.py</code> breaks the page into major parts.</li>
+<li><strong>Row Grouping:</strong> Group text elements that appear on the same horizontal line (similar Y coordinates). The <code>same</code> function in <code>pdf2Json_amit_edit.py</code> helps group items horizontally, and <code>returnc</code> in <code>ocrNC.py</code> and <code>ocrCA.py</code> processes data row by row within a defined vertical segment.</li>
+<li><strong>Column Identification:</strong> Determine which column data belongs to based on its horizontal position (X coordinate) relative to known column headers or dividing lines.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="how-it-works-connecting-text-to-meaning">How It Works: Connecting Text to Meaning</h2>
+<p>Let's see how a specific parser, say for a scanned California form (<code>ocrCA.py</code>), might use these techniques:</p>
+<ol>
+<li><strong>Input:</strong> The parser receives raw words and their coordinates from the <a href="../04_ocr_parser_engine_/">OCR Parser Engine</a>.
+    <div class="highlight"><pre><span></span><code>[ [[50, 700], [150, 715]], &#39;Bureau&#39; ],
+[ [[160, 700], [190, 715]], &#39;No.&#39; ],
+[ [[200, 700], [260, 715]], &#39;123456&#39; ],
+[ [[50, 650], [150, 665]], &#39;Effective&#39; ],
+[ [[160, 650], [260, 665]], &#39;01/01/2024&#39; ],
+[ [[50, 300], [100, 315]], &#39;Code&#39; ],   // Table Header
+[ [[150, 300], [250, 315]], &#39;Payroll&#39; ], // Table Header
+[ [[50, 280], [100, 295]], &#39;8810&#39; ],    // Table Data Row 1
+[ [[150, 280], [250, 295]], &#39;100000&#39; ],  // Table Data Row 1
+[ [[50, 260], [100, 275]], &#39;9012&#39; ],    // Table Data Row 2
+[ [[150, 260], [250, 275]], &#39;50000&#39; ],   // Table Data Row 2
+[ [[500, 100], [550, 115]], &#39;Totals&#39; ],  // Section Marker
+[ [[150, 80], [250, 95]], &#39;150000&#39; ],    // Totals Data
+</code></pre></div></li>
+<li><strong>Layout Analysis (inside <code>ocrCA.py</code>):</strong><ul>
+<li><strong>Keyword + Relative Position:</strong> "Find the word 'Bureau'. Define a search area to its right. Find text ('123456') in that area. This is the Risk ID." (Uses <code>blockIsIn</code>).</li>
+<li><strong>Keyword + Relative Position:</strong> "Find the word 'Effective'. Look right for a date ('01/01/2024'). This is the Effective Date."</li>
+<li><strong>Structure (Splitting):</strong> "Find the word 'Totals'. Use its Y coordinate in the <code>split</code> function to define the boundary between the main data table and the totals section."</li>
+<li><strong>Structure (Row Processing):</strong> "Within the table section defined by <code>split</code>, use <code>returnc</code> to process rows. For each row (identified by similar Y coordinates), find the text under the 'Code' X range ('8810') and the text under the 'Payroll' X range ('100000')."</li>
+</ul>
+</li>
+<li><strong>Output:</strong> The parser now understands the <em>meaning</em> of the text pieces and organizes them, ready for the next step (<a href="../06_data_extraction___transformation_/">Data Extraction &amp; Transformation</a>).
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="s1">&#39;risk_id&#39;</span><span class="p">:</span> <span class="s1">&#39;123456&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;rating_effective_date&#39;</span><span class="p">:</span> <span class="s1">&#39;01/01/2024&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;table_rows&#39;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;8810&#39;</span><span class="p">,</span> <span class="s1">&#39;payroll&#39;</span><span class="p">:</span> <span class="s1">&#39;100000&#39;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;9012&#39;</span><span class="p">,</span> <span class="s1">&#39;payroll&#39;</span><span class="p">:</span> <span class="s1">&#39;50000&#39;</span><span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s1">&#39;totals&#39;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">&#39;payroll&#39;</span><span class="p">:</span> <span class="s1">&#39;150000&#39;</span>
+    <span class="c1"># ... other totals</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ol>
+<p>Let's visualize how the parser uses this logic:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant Parser as State/Format Specific Parser (e.g., ocrCA.py)
+    participant Engine as PDFMiner/OCR Engine
+    participant LA as Layout Analyzer Logic (within Parser)
+    participant Data as Extracted Data Structure
+
+    Parser-&gt;&gt;Engine: Get Raw Text &amp; Coordinates
+    Engine--&gt;&gt;Parser: Raw Data: [ [[Coords], 'Text'], ... ]
+    Parser-&gt;&gt;LA: Apply layout rules to Raw Data
+    LA-&gt;&gt;LA: Find keyword 'Bureau' at [X1, Y1]
+    LA-&gt;&gt;LA: Use blockIsIn() to find text ('123456') near [X1, Y1]
+    LA-&gt;&gt;LA: Find 'Totals' keyword
+    LA-&gt;&gt;LA: Use split() based on 'Totals' Y coordinate
+    LA-&gt;&gt;LA: Use returnc() to process rows in table section
+    LA--&gt;&gt;Parser: Identified Fields: {'risk_id': '123456', 'table_rows': [...]}
+    Parser-&gt;&gt;Data: Store structured data</code></pre>
+<h2 id="code-examples-seeing-the-detective-work">Code Examples: Seeing the Detective Work</h2>
+<p>The Layout Analyzer logic is woven into the specific parser scripts. Let's look at simplified examples of the techniques:</p>
+<p><strong>1. Keyword + Relative Position (from <code>ocrCA.py</code>)</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># (Simplified logic from ocrCA.py)</span>
+<span class="c1"># &#39;LIST&#39; contains [coordinates, word] from OCR Engine</span>
+
+<span class="n">risk_id</span> <span class="o">=</span> <span class="s2">&quot;Not Found&quot;</span>
+<span class="n">bureau_cord</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Find the coordinates of the keyword &quot;Bureau&quot;</span>
+<span class="k">for</span> <span class="n">coords</span><span class="p">,</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">LIST</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s2">&quot;bureau&quot;</span> <span class="ow">in</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+        <span class="n">bureau_cord</span> <span class="o">=</span> <span class="n">coords</span> <span class="c1"># Found keyword location</span>
+        <span class="k">break</span>
+
+<span class="c1"># If found, define an area to the right and search</span>
+<span class="k">if</span> <span class="n">bureau_cord</span><span class="p">:</span>
+    <span class="c1"># Define area relative to bureau_cord (simplified X, Y ranges)</span>
+    <span class="n">risk_id_area</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="n">bureau_cord</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">100</span><span class="p">,</span> <span class="n">bureau_cord</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">10</span><span class="p">],</span> <span class="c1"># Top-Left</span>
+                     <span class="p">[</span><span class="n">bureau_cord</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">250</span><span class="p">,</span> <span class="n">bureau_cord</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">10</span><span class="p">]</span> <span class="p">]</span> <span class="c1"># Bottom-Right</span>
+
+    <span class="c1"># Search for words inside that calculated area using blockIsIn</span>
+    <span class="k">for</span> <span class="n">coords</span><span class="p">,</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">LIST</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">blockIsIn</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">risk_id_area</span><span class="p">):</span> <span class="c1"># blockIsIn checks coordinates</span>
+             <span class="n">risk_id</span> <span class="o">+=</span> <span class="n">word</span> <span class="c1"># Found Risk ID part</span>
+</code></pre></div>
+<ul>
+<li><strong>Explanation:</strong> This finds the location of "bureau" and then defines a search box (<code>risk_id_area</code>) relative to it. The <code>blockIsIn</code> function checks if a word's coordinates fall inside this box.</li>
+</ul>
+<p><strong>2. Coordinate-Based Search (from <code>pdf_parser.py</code>)</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># (Simplified logic from pdf_parser.py)</span>
+<span class="c1"># &#39;finals&#39; is list of [ [X, Y], &#39;Text&#39;, &#39;Font&#39;] from PDFMiner Engine</span>
+
+<span class="n">risk_id</span> <span class="o">=</span> <span class="s2">&quot;Not Found&quot;</span>
+
+<span class="c1"># Iterate through text elements</span>
+<span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">finals</span><span class="p">:</span>
+    <span class="n">x_coord</span> <span class="o">=</span> <span class="n">element</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">y_coord</span> <span class="o">=</span> <span class="n">element</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">element</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Check if coordinates fall within a specific box for Risk ID</span>
+    <span class="c1"># (Example coordinates for a specific NCCI layout)</span>
+    <span class="k">if</span> <span class="mi">480</span> <span class="o">&lt;</span> <span class="n">x_coord</span> <span class="o">&lt;</span> <span class="mi">520</span> <span class="ow">and</span> <span class="mi">730</span> <span class="o">&lt;</span> <span class="n">y_coord</span> <span class="o">&lt;</span> <span class="mi">745</span><span class="p">:</span>
+        <span class="n">risk_id</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="c1"># Found it based on location!</span>
+        <span class="k">break</span>
+</code></pre></div>
+<ul>
+<li><strong>Explanation:</strong> This code directly checks if a text element's <code>x_coord</code> and <code>y_coord</code> fall within a hardcoded range (e.g., X between 480-520, Y between 730-745) known to contain the Risk ID on that specific form.</li>
+</ul>
+<p><strong>3. Structural Analysis - Splitting (Conceptual <code>split</code> from <code>ocrNC.py</code>)</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># (Conceptual logic inspired by split in ocrNC.py)</span>
+<span class="c1"># &#39;cords&#39; = list of coordinates, &#39;detected_word&#39; = list of words</span>
+
+<span class="n">secs_list</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># To store vertical section boundaries</span>
+<span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">image_shape</span> <span class="c1"># Get page dimensions</span>
+
+<span class="c1"># Find the vertical position (Y coordinate) of the first &quot;Totals&quot; keyword</span>
+<span class="n">tots</span> <span class="o">=</span> <span class="nb">list</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">cords</span><span class="p">,</span><span class="n">detected_word</span><span class="p">))</span> <span class="k">if</span> <span class="s2">&quot;totals&quot;</span> <span class="ow">in</span> <span class="n">y</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+<span class="n">tots</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">tots</span> <span class="p">,</span><span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># Sort by Y position</span>
+
+<span class="k">if</span> <span class="n">tots</span><span class="p">:</span>
+    <span class="n">first_total_y</span> <span class="o">=</span> <span class="n">tots</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># Define section 1: from top of page (e.g., Y=200) to just above &quot;Totals&quot;</span>
+    <span class="n">section1_boundary</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="n">first_total_y</span> <span class="o">-</span> <span class="mi">10</span><span class="p">]]</span> <span class="c1"># [[TL_X, TL_Y], [BR_X, BR_Y]]</span>
+    <span class="n">secs_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">section1_boundary</span><span class="p">)</span>
+    <span class="c1"># Define section 2: from &quot;Totals&quot; line downwards</span>
+    <span class="n">section2_boundary</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="n">first_total_y</span><span class="p">],</span> <span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="n">r</span><span class="p">]]</span>
+    <span class="n">secs_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">section2_boundary</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li><strong>Explanation:</strong> This finds the "Totals" keyword. It uses the Y-coordinate of "Totals" to define the vertical boundaries (<code>secs_list</code>) that split the page into sections (e.g., the main table area vs. the totals area).</li>
+</ul>
+<p><strong>4. Structural Analysis - Row Processing (Conceptual <code>returnc</code> from <code>ocrNC.py</code>)</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># (Conceptual logic inspired by returnc in ocrNC.py)</span>
+<span class="c1"># &#39;secs_list&#39; defines section boundaries [[X1,Y1],[X2,Y2]]</span>
+<span class="c1"># &#39;cords&#39;, &#39;detected_word&#39; have raw data</span>
+
+<span class="n">section_index</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># Process the first section (e.g., the main table)</span>
+<span class="n">section_bounds</span> <span class="o">=</span> <span class="n">secs_list</span><span class="p">[</span><span class="n">section_index</span><span class="p">]</span>
+<span class="n">y_start</span> <span class="o">=</span> <span class="n">section_bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># Top Y of section</span>
+<span class="n">y_end</span> <span class="o">=</span> <span class="n">section_bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>   <span class="c1"># Bottom Y of section</span>
+
+<span class="c1"># Filter elements within the section&#39;s vertical bounds</span>
+<span class="n">section_elements</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">y_start</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">y_end</span><span class="p">),</span>
+                              <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="n">cords</span><span class="p">,</span> <span class="n">detected_word</span><span class="p">)))))</span>
+
+<span class="c1"># Sort elements by Y, then X to group rows (simplified)</span>
+<span class="n">section_elements</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+
+<span class="c1"># (Code here would iterate through sorted elements, grouping those</span>
+<span class="c1">#  with very similar Y coordinates into logical rows &#39;c&#39;)</span>
+<span class="n">rows_in_section</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># Stores grouped rows -&gt; [[element1, element2], [element3,...]]</span>
+
+<span class="c1"># Simplified row grouping based on Y coordinate tolerance</span>
+<span class="n">current_row</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">current_y</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">y_tolerance</span> <span class="o">=</span> <span class="mi">15</span> <span class="c1"># Pixels</span>
+<span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">section_elements</span><span class="p">:</span>
+    <span class="n">element_y</span> <span class="o">=</span> <span class="n">element</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">current_row</span> <span class="ow">or</span> <span class="nb">abs</span><span class="p">(</span><span class="n">element_y</span> <span class="o">-</span> <span class="n">current_y</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">y_tolerance</span><span class="p">:</span>
+        <span class="n">current_row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+        <span class="n">current_y</span> <span class="o">=</span> <span class="n">element_y</span> <span class="c1"># Update row&#39;s Y anchor</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rows_in_section</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">current_row</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span> <span class="c1"># Sort row by X</span>
+        <span class="n">current_row</span> <span class="o">=</span> <span class="p">[</span><span class="n">element</span><span class="p">]</span> <span class="c1"># Start new row</span>
+        <span class="n">current_y</span> <span class="o">=</span> <span class="n">element_y</span>
+<span class="k">if</span> <span class="n">current_row</span><span class="p">:</span> <span class="c1"># Add the last row</span>
+    <span class="n">rows_in_section</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">current_row</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+
+<span class="c1"># &#39;rows_in_section&#39; now holds data grouped by logical rows for this section</span>
+</code></pre></div>
+<ul>
+<li><strong>Explanation:</strong> This code conceptually filters text elements belonging to a specific vertical section (defined by <code>y_start</code>, <code>y_end</code>). It then sorts these elements primarily by their Y coordinate. By iterating through the sorted list and grouping elements whose Y coordinates are very close (within <code>y_tolerance</code>), it reconstructs the logical rows of the table within that section.</li>
+</ul>
+<p>These examples illustrate how the Layout Analyzer logic within each parser acts like a detective, using keywords, coordinates, and structural clues (like splitting and row grouping) to decipher the layout of the document page.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>The Layout Analyzer isn't a single script but the combined intelligence within the <a href="../02_state_format_specific_parser_/">State/Format Specific Parsers</a>. It takes the raw text and coordinates provided by the <a href="../03_pdfminer_parser_engine_/">PDFMiner Parser Engine</a> or <a href="../04_ocr_parser_engine_/">OCR Parser Engine</a> and makes sense of the document's structure. By using techniques like keyword searching, coordinate checking, page splitting (<code>split</code>, <code>segmentation</code>), and row/column analysis (<code>returnc</code>, <code>same</code>), it figures out where different pieces of information belong on the page.</p>
+<p>This structured understanding is crucial. Now that the system knows <em>where</em> the data is and <em>what</em> it generally represents (e.g., this number is Payroll in this row), the next step is to actually extract that specific data value, clean it up, and put it into the final format.</p>
+<p><strong>Next:</strong> <a href="../06_data_extraction___transformation_/">Chapter 6: Data Extraction &amp; Transformation</a></p>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10.9.1/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

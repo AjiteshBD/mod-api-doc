@@ -1,0 +1,866 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../05_layout_analyzer_/">
+      
+      
+        <link rel="next" href="../07_json_output_formatter_/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Chapter 6: Data Extraction & Transformation - Backend-mod-api-php</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.2afb09e1.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://unpkg.com/mermaid@10.9.1/dist/mermaid.min.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-6-data-extraction-transformation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Backend-mod-api-php" class="md-header__button md-logo" aria-label="Backend-mod-api-php" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Backend-mod-api-php
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 6: Data Extraction &amp; Transformation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Backend-mod-api-php" class="md-nav__button md-logo" aria-label="Backend-mod-api-php" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Backend-mod-api-php
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tutorial: Backend-mod-api-php
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_pdf_type_detector_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 1: PDF Type Detector
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_state_format_specific_parser_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 2: State/Format Specific Parser
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_pdfminer_parser_engine_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 3: PDFMiner Parser Engine
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_ocr_parser_engine_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 4: OCR Parser Engine
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_layout_analyzer_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 5: Layout Analyzer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Chapter 6: Data Extraction &amp; Transformation
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 6: Data Extraction &amp; Transformation
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem-raw-data-is-often-messy" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Problem: Raw Data is Often Messy!
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-solution-extraction-cleaning-and-transformation" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Solution: Extraction, Cleaning, and Transformation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-steps-in-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Steps in Detail
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Steps in Detail">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-extraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Extraction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-cleaning" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Cleaning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-transformation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Transformation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works-inside-the-parser" class="md-nav__link">
+    <span class="md-ellipsis">
+      How It Works: Inside the Parser
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-snippets-seeing-it-in-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Snippets: Seeing It in Action
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_json_output_formatter_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 7: JSON Output Formatter
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem-raw-data-is-often-messy" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Problem: Raw Data is Often Messy!
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-solution-extraction-cleaning-and-transformation" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Solution: Extraction, Cleaning, and Transformation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-steps-in-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Steps in Detail
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Steps in Detail">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-extraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Extraction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-cleaning" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Cleaning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-transformation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Transformation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works-inside-the-parser" class="md-nav__link">
+    <span class="md-ellipsis">
+      How It Works: Inside the Parser
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-snippets-seeing-it-in-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Snippets: Seeing It in Action
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="chapter-6-data-extraction-transformation">Chapter 6: Data Extraction &amp; Transformation</h1>
+<p>Welcome back! In the previous chapter, <a href="../05_layout_analyzer_/">Layout Analyzer</a>, we learned how the system acts like a detective, figuring out the structure of the PDF and identifying <em>where</em> specific pieces of information like "Risk ID" or "Payroll" are located on the page.</p>
+<p>But just knowing <em>where</em> the answer is isn't enough. Now we need to actually read the answer, clean it up, and make sure it's in the right format for our computer system to use.</p>
+<h2 id="the-problem-raw-data-is-often-messy">The Problem: Raw Data is Often Messy!</h2>
+<p>Imagine the <a href="../05_layout_analyzer_/">Layout Analyzer</a> tells us:
+*   "The Risk ID is this text: '123 456'"
+*   "The Payroll amount is this text: '$ 100,000.00'"
+*   "The Effective Date is this text: '01 / 01 / 24'"
+*   "The Risk Name is this text: '   ACME Corp   '"</p>
+<p>This raw data isn't quite ready for our system.
+*   The Risk ID has an extra space.
+*   The Payroll has a dollar sign, a comma, and maybe extra spaces. It's also text, but we need it as a number.
+*   The Date has extra spaces and uses a two-digit year, but maybe we need a four-digit year.
+*   The Risk Name has extra spaces at the beginning and end.</p>
+<p>We need a way to automatically "tidy up" this raw text and convert it into a clean, consistent format.</p>
+<h2 id="the-solution-extraction-cleaning-and-transformation">The Solution: Extraction, Cleaning, and Transformation</h2>
+<p>This chapter focuses on the final steps of getting the actual data values:</p>
+<ol>
+<li><strong>Extraction:</strong> Precisely pulling out the text identified by the <a href="../05_layout_analyzer_/">Layout Analyzer</a>.</li>
+<li><strong>Cleaning:</strong> Removing any unwanted characters like punctuation (commas, dollar signs), extra spaces, or line breaks.</li>
+<li><strong>Transformation:</strong> Converting the cleaned text into the correct data type (like turning the text "100000" into an actual number <code>100000</code>) and standardizing formats (like making sure all dates look the same).</li>
+</ol>
+<p><strong>Analogy:</strong> Think of this process like copying information from a handwritten form into a neat spreadsheet. You first <strong>extract</strong> the answer written in a specific box. Then, you <strong>clean</strong> it up – maybe the handwriting included a stray mark or an extra comma, so you ignore those. Finally, you <strong>transform</strong> it – if the form asked for a number, you write down the number <code>100000</code>, not the text "$100,000"; if it asked for a date, you might write it in a standard YYYY-MM-DD format, even if the form had MM/DD/YY.</p>
+<h2 id="key-steps-in-detail">Key Steps in Detail</h2>
+<p>Let's break down how this happens within the <a href="../02_state_format_specific_parser_/">State/Format Specific Parser</a> scripts (like <code>pdf_parser.py</code> or <code>ocrCA.py</code>):</p>
+<h3 id="1-extraction">1. Extraction</h3>
+<p>After the <a href="../05_layout_analyzer_/">Layout Analyzer</a> logic finds the location (coordinates or relative position) of a data field, the parser script grabs the specific text element(s) associated with that location.</p>
+<ul>
+<li><strong>If using PDFMiner:</strong> It might grab the <code>text</code> content from an element found within specific coordinates.</li>
+<li><strong>If using OCR:</strong> It might combine words found within a specific bounding box identified relative to a keyword.</li>
+</ul>
+<p><strong>Example (Conceptual):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Layout Analyzer told us Risk ID is around X=500, Y=700</span>
+<span class="n">raw_risk_id_text</span> <span class="o">=</span> <span class="n">find_text_at_coords</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">700</span><span class="p">)</span>
+<span class="c1"># raw_risk_id_text might be &quot;123 456&quot;</span>
+</code></pre></div>
+<h3 id="2-cleaning">2. Cleaning</h3>
+<p>Now that we have the raw text, we need to clean it. This usually involves simple string operations:</p>
+<ul>
+<li><strong>Removing extra whitespace:</strong> Using <code>.strip()</code> to remove spaces from the beginning and end.</li>
+<li><strong>Removing specific characters:</strong> Using <code>.replace()</code> to remove things like <code>$</code>, <code>,</code>, or sometimes even periods if they aren't decimal points.</li>
+</ul>
+<p><strong>Example (Conceptual Python):</strong></p>
+<p><div class="highlight"><pre><span></span><code><span class="n">raw_payroll_text</span> <span class="o">=</span> <span class="s2">&quot;$ 100,000.00 &quot;</span>
+
+<span class="c1"># Remove leading/trailing spaces</span>
+<span class="n">cleaned_text</span> <span class="o">=</span> <span class="n">raw_payroll_text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="c1"># Result: &quot;$ 100,000.00&quot;</span>
+
+<span class="c1"># Remove dollar sign</span>
+<span class="n">cleaned_text</span> <span class="o">=</span> <span class="n">cleaned_text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;$&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="c1"># Result: &quot; 100,000.00&quot;</span>
+
+<span class="c1"># Remove comma</span>
+<span class="n">cleaned_text</span> <span class="o">=</span> <span class="n">cleaned_text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="c1"># Result: &quot; 100000.00&quot;</span>
+
+<span class="c1"># Remove internal space (carefully!)</span>
+<span class="n">cleaned_text</span> <span class="o">=</span> <span class="n">cleaned_text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="c1"># Result: &quot;100000.00&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">cleaned_text</span><span class="p">)</span> <span class="c1"># Output: 100000.00</span>
+</code></pre></div>
+*   <strong>Explanation:</strong> We use basic Python string functions like <code>strip()</code> and <code>replace()</code> to get rid of unwanted characters and spaces, leaving just the essential data. The <code>clean()</code> and <code>cleant()</code> functions in scripts like <code>ocrCA.py</code> perform similar tasks.</p>
+<h3 id="3-transformation">3. Transformation</h3>
+<p>The final step is to convert the cleaned text into the right format and data type.</p>
+<ul>
+<li>
+<p><strong>Type Conversion (String to Number):</strong> If the data represents a number (like payroll or losses), we convert the cleaned text string into a numerical type like an integer (<code>int</code>) or a floating-point number (<code>float</code>).</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">cleaned_payroll_text</span> <span class="o">=</span> <span class="s2">&quot;100000.00&quot;</span>
+<span class="n">payroll_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">cleaned_payroll_text</span><span class="p">)</span> <span class="c1"># Convert string to float</span>
+<span class="c1"># payroll_value is now the number 100000.0</span>
+
+<span class="n">cleaned_id_text</span> <span class="o">=</span> <span class="s2">&quot;123456&quot;</span>
+<span class="n">risk_id_value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cleaned_id_text</span><span class="p">)</span> <span class="c1"># Convert string to integer</span>
+<span class="c1"># risk_id_value is now the number 123456</span>
+</code></pre></div>
+*   <strong>Explanation:</strong> Python's <code>int()</code> and <code>float()</code> functions turn text representations of numbers into actual numbers that the computer can perform calculations with. If the text can't be converted (e.g., trying <code>int("hello")</code>), it will cause an error, so the real code often includes checks (using <code>try-except</code>) to handle cases where the data might be missing or invalid.</p>
+</li>
+<li>
+<p><strong>Type Conversion (String to Date):</strong> Dates might need to be standardized. While this project often keeps dates as strings found in the document, a more complex system might convert "01/01/24" or "Jan 1, 2024" into a standard format like "2024-01-01". (We won't dive deep into date parsing here, but be aware it's a common transformation).</p>
+</li>
+<li>
+<p><strong>Handling Variations:</strong> Sometimes data appears in slightly different ways.</p>
+<ul>
+<li><strong>Split Words:</strong> OCR might read "Policy No." as "Policy" and "No." separately. The code might need logic to look for these parts close together and combine them.</li>
+<li><strong>Different Formats:</strong> As mentioned, dates or numbers might have variations ($1,000 vs 1000.00). The cleaning steps help standardize these.</li>
+<li><strong>Abbreviations:</strong> Sometimes abbreviations are used (e.g., "INJ" for injury type). The code might replace these with a standard value.</li>
+</ul>
+</li>
+</ul>
+<h2 id="how-it-works-inside-the-parser">How It Works: Inside the Parser</h2>
+<p>This extraction, cleaning, and transformation logic is tightly integrated within each <a href="../02_state_format_specific_parser_/">State/Format Specific Parser</a>. It happens <em>after</em> the <a href="../05_layout_analyzer_/">Layout Analyzer</a> logic has pinpointed the likely location and identity of a data field.</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant Parser as State/Format Specific Parser
+    participant LA as Layout Analyzer Logic
+    participant Extractor as Extraction Logic
+    participant Cleaner as Cleaning Logic
+    participant Transformer as Transformation Logic
+    participant CleanData as Structured Clean Data
+
+    Parser-&gt;&gt;LA: Here's the raw text/coords, find the Payroll field.
+    LA--&gt;&gt;Parser: Found Payroll text element(s) here: [Raw Payroll Text].
+    Parser-&gt;&gt;Extractor: Extract the text content.
+    Extractor--&gt;&gt;Parser: Raw Text: "$ 100,000.00 "
+    Parser-&gt;&gt;Cleaner: Clean this text.
+    Cleaner--&gt;&gt;Parser: Cleaned Text: "100000.00"
+    Parser-&gt;&gt;Transformer: Convert this text to a number.
+    Transformer--&gt;&gt;Parser: Numerical Value: 100000.0
+    Parser-&gt;&gt;CleanData: Store: payroll = 100000.0</code></pre>
+<h2 id="code-snippets-seeing-it-in-action">Code Snippets: Seeing It in Action</h2>
+<p>Let's look at simplified examples inspired by the functions used in the parsers:</p>
+<p><strong>1. Basic Cleaning (inspired by <code>clean</code> in <code>ocrCA.py</code>)</strong></p>
+<p><div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">string</span> <span class="c1"># Import Python&#39;s string module</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">simple_clean</span><span class="p">(</span><span class="n">text_to_clean</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Removes punctuation and leading/trailing spaces.&quot;&quot;&quot;</span>
+    <span class="c1"># Define punctuation to remove (can be customized)</span>
+    <span class="n">punctuation_to_remove</span> <span class="o">=</span> <span class="s1">&#39;!&quot;$%&amp;</span><span class="se">\&#39;</span><span class="s1">()+/:;&lt;=&gt;?@[</span><span class="se">\\</span><span class="s1">]^_`{|}~&#39;</span>
+    <span class="c1"># Remove punctuation</span>
+    <span class="n">no_punctuation</span> <span class="o">=</span> <span class="n">text_to_clean</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">punctuation_to_remove</span><span class="p">))</span>
+    <span class="c1"># Remove leading/trailing spaces</span>
+    <span class="n">cleaned</span> <span class="o">=</span> <span class="n">no_punctuation</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">cleaned</span>
+
+<span class="c1"># Example Usage</span>
+<span class="n">raw_text</span> <span class="o">=</span> <span class="s2">&quot;  $100,000 total! &quot;</span>
+<span class="n">clean_text</span> <span class="o">=</span> <span class="n">simple_clean</span><span class="p">(</span><span class="n">raw_text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Raw: &#39;</span><span class="si">{</span><span class="n">raw_text</span><span class="si">}</span><span class="s2">&#39;, Cleaned: &#39;</span><span class="si">{</span><span class="n">clean_text</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="c1"># Output: Raw: &#39;  $100,000 total! &#39;, Cleaned: &#39;100,000 total&#39;</span>
+</code></pre></div>
+*   <strong>Explanation:</strong> This function uses <code>str.maketrans</code> to define characters to remove and <code>translate</code> to remove them. Then <code>strip()</code> removes whitespace from the ends. Note that it <em>doesn't</em> remove the comma here, which might be needed for number conversion later. The <code>cleant</code> function in <code>ocrCA.py</code> removes even more punctuation.</p>
+<p><strong>2. Cleaning and Converting to Integer (Conceptual)</strong></p>
+<p><div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_integer_value</span><span class="p">(</span><span class="n">raw_text</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Cleans text for integer conversion and converts.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">raw_text</span><span class="p">:</span> <span class="c1"># Handle empty input</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Remove common non-numeric chars (modify as needed)</span>
+        <span class="n">cleaned</span> <span class="o">=</span> <span class="n">raw_text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;$&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="c1"># Try to convert to integer</span>
+        <span class="n">integer_value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cleaned</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">integer_value</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="c1"># Handle cases where text is not a valid integer</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: Could not convert &#39;</span><span class="si">{</span><span class="n">raw_text</span><span class="si">}</span><span class="s2">&#39; to integer.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span> <span class="c1"># Return a default value</span>
+
+<span class="c1"># Example Usage</span>
+<span class="n">payroll_text</span> <span class="o">=</span> <span class="s2">&quot; 150,000 &quot;</span>
+<span class="n">payroll_int</span> <span class="o">=</span> <span class="n">get_integer_value</span><span class="p">(</span><span class="n">payroll_text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Payroll Text: &#39;</span><span class="si">{</span><span class="n">payroll_text</span><span class="si">}</span><span class="s2">&#39;, Integer Value: </span><span class="si">{</span><span class="n">payroll_int</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># Output: Payroll Text: &#39; 150,000 &#39;, Integer Value: 150000</span>
+
+<span class="n">invalid_text</span> <span class="o">=</span> <span class="s2">&quot;Not a number&quot;</span>
+<span class="n">invalid_int</span> <span class="o">=</span> <span class="n">get_integer_value</span><span class="p">(</span><span class="n">invalid_text</span><span class="p">)</span>
+<span class="c1"># Output: Warning: Could not convert &#39;Not a number&#39; to integer.</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid Text: &#39;</span><span class="si">{</span><span class="n">invalid_text</span><span class="si">}</span><span class="s2">&#39;, Integer Value: </span><span class="si">{</span><span class="n">invalid_int</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># Output: Invalid Text: &#39;Not a number&#39;, Integer Value: 0</span>
+</code></pre></div>
+*   <strong>Explanation:</strong> This function first cleans the string by removing commas and dollar signs. Then, it uses a <code>try-except</code> block. It <em>tries</em> to convert the cleaned string to an integer using <code>int()</code>. If it works, the integer is returned. If <code>int()</code> fails (because the text isn't a valid number), the <code>except ValueError</code> block catches the error, prints a warning, and returns a default value (0). This makes the code more robust. Similar logic is used for converting to floats using <code>float()</code>.</p>
+<p><strong>3. Extracting and Combining Data (Conceptual)</strong></p>
+<p>This logic is often specific to the parser and layout. For example, finding the "Risk ID" in <code>pdf_parser.py</code> involves checking coordinates:</p>
+<p><div class="highlight"><pre><span></span><code><span class="c1"># (Simplified logic from pdf_parser.py)</span>
+<span class="c1"># &#39;finals&#39; is list of [[X, Y], &#39;Text&#39;, &#39;Font&#39;] from PDFMiner Engine</span>
+<span class="n">risk_id</span> <span class="o">=</span> <span class="s2">&quot;Not Found&quot;</span>
+
+<span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">finals</span><span class="p">:</span>
+    <span class="n">x_coord</span> <span class="o">=</span> <span class="n">element</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">y_coord</span> <span class="o">=</span> <span class="n">element</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">element</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># Raw text extracted</span>
+
+    <span class="c1"># Rule: Check if coordinates fall within the Risk ID box</span>
+    <span class="k">if</span> <span class="mi">480</span> <span class="o">&lt;</span> <span class="n">x_coord</span> <span class="o">&lt;</span> <span class="mi">520</span> <span class="ow">and</span> <span class="mi">730</span> <span class="o">&lt;</span> <span class="n">y_coord</span> <span class="o">&lt;</span> <span class="mi">745</span><span class="p">:</span>
+        <span class="c1"># Found it! Now clean and store.</span>
+        <span class="n">risk_id</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="c1"># Basic cleaning (remove spaces)</span>
+        <span class="k">break</span> <span class="c1"># Stop searching once found</span>
+</code></pre></div>
+*   <strong>Explanation:</strong> Here, the extraction is simply taking <code>element[1]</code> once the coordinates match. The cleaning is a simple <code>.strip()</code>. Transformation isn't needed if the Risk ID is expected to be a string.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Data Extraction &amp; Transformation is the crucial step where the raw text identified by the <a href="../05_layout_analyzer_/">Layout Analyzer</a> gets turned into clean, usable data. It involves:
+*   <strong>Extracting</strong> the specific text content.
+*   <strong>Cleaning</strong> it by removing unwanted characters and spaces.
+*   <strong>Transforming</strong> it into the correct data type (like numbers or standard date strings) and handling variations.</p>
+<p>This process, embedded within the logic of each <a href="../02_state_format_specific_parser_/">State/Format Specific Parser</a>, ensures that the final data is accurate and ready for the next stage: putting it all together in a structured output format.</p>
+<p><strong>Next:</strong> <a href="../07_json_output_formatter_/">Chapter 7: JSON Output Formatter</a></p>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10.9.1/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>
